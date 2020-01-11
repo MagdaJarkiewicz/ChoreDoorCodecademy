@@ -1,0 +1,25 @@
+body {
+  background-color: #010165;
+  margin: 0px;
+}
+
+.header {
+  background-color: #00ffff;
+}
+
+.title-row {
+  margin-top: 42px;
+  margin-bottom: 21px;
+  text-align: center;
+}
+
+.instructions-title {
+  font-size: 18px;
+  color: #00ffff;
+  font-family: 'Works Sans';
+}
+
+.door-frame {
+  cursor: pointer;
+  padding: 10px;
+}
