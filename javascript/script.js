@@ -24,13 +24,14 @@ const playDoor = (door) => {
    gameOver('lose');
   }
 }
-let botDoorPath = "https://s3.amazonaws.com/codecademy-content/projects/chore-door/images/robot.svg"
-let beachDoorPath = "https://s3.amazonaws.com/codecademy-content/projects/chore-door/images/beach.svg"
-let spaceDoorPath = "https://s3.amazonaws.com/codecademy-content/projects/chore-door/images/space.svg"
+let botDoorPath = "https://s3.amazonaws.com/codecademy-content/projects/chore-door/images/robot.svg";
+let beachDoorPath = "https://s3.amazonaws.com/codecademy-content/projects/chore-door/images/beach.svg";
+let spaceDoorPath = "https://s3.amazonaws.com/codecademy-content/projects/chore-door/images/space.svg";
 let numClosedDoors = 3;
 let openDoor1;
 let openDoor2;
 let openDoor3;
+let currentlyPlaying = true;
 let randomChoreDoorGenerator = () =>
 {   let choreDoor = Math.floor(Math.random()*numClosedDoors); if (choreDoor===0){openDoor1=botDoorPath;
 openDoor2=beachDoorPath;
@@ -43,27 +44,40 @@ openDoor1=spaceDoorPath;
 openDoor2=beachDoorPath;
 }  }
 door1.onclick = () => {
-if (!isClicked(door1)){
+if (currentlyPlaying && !isClicked(door1)){
 doorImage1.src=openDoor1;
 playDoor(door1);
-if(!isClicked(door))
 } }
 door2.onclick = () => {
-if (!isClicked(door2)){
+if (currentlyPlaying && !isClicked(door2)){
 doorImage2.src=openDoor2;
 playDoor(door2);
 }
 }
 door3.onclick = () => {
-if (!isClicked(door3)){
+if (currentlyPlaying && !isClicked(door3)){
 doorImage3.src=openDoor3;
 playDoor(door3);
 }
+};
+startButton.onclick = ()=> {
+if (!currentlyPlaying){
+ startRound();}
+}
+const startRound = () => {
+ door1.src = closedDoorPath;
+ door2.src = closedDoorPath;
+ door3.src = closedDoorPath;
+ numClosedDoors=3;
+ startButton.innerHTML='Good luck!'
+ currentlyPlaying=true;
+ randomChoreDoorGenerator();
 };
 const gameOver = (status) => {
  if (status==='win'){
    startButton.innerHTML='You win! Play again?';
  } else {startButton.innerHTML='Game Over! Play Again?'
         }
+ currentlyPlaying=false;
 }
-randomChoreDoorGenerator() 
+startRound(); 
